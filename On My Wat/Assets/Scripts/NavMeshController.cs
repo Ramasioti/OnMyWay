@@ -10,10 +10,18 @@ public class NavMeshController : MonoBehaviour
 
     private NavMeshAgent agente;
 
+    private int i = 0;
+
+    public int numero;
+
 
     void Start()
     {
         Destination();
+        brumbrum = PlayerPrefs.GetFloat("save" + numero, brumbrum);
+
+        
+        Debug.Log(brumbrum);
     }
 
     
@@ -34,19 +42,79 @@ public class NavMeshController : MonoBehaviour
  
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider collision)
     {
-        if (other.gameObject.CompareTag("PuntoControl"))
+        if (collision.gameObject.CompareTag("PuntoControl"))
         {
-            agente.destination = objetive[1].position;
-            
+            i++;
+            agente.destination = objetive[i].position;
+            agente.speed = brumbrum;
         }
 
-        if(other.gameObject.CompareTag("Destroy"))
+        if (collision.gameObject.CompareTag("Wall"))
         {
-            
-
+            Destroy(this.gameObject);
         }
 
     }
+
+
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        //if (collision.gameObject.CompareTag("Player"))
+        //{
+        //    agente.isStopped = true;
+        //}
+
+
+        if (collision.gameObject.CompareTag("Semaforo"))
+        {
+            agente.isStopped = true;
+
+        }
+
+
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        //if (collision.gameObject.CompareTag("Player"))
+        //{
+        //    agente.isStopped = true;
+            
+            
+        //}
+
+
+        //if (collision.gameObject.CompareTag("Semaforo"))
+        //{
+        //    agente.isStopped = true;
+            
+
+        //}
+
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        //if (collision.gameObject.CompareTag("Player"))
+        //{
+
+        //    agente.isStopped = false;
+
+        //}
+
+        if (collision.gameObject.CompareTag("Semaforo"))
+        {
+
+            agente.isStopped = false;
+
+
+        }
+    }
+
+
+
 }

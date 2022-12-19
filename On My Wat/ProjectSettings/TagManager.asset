@@ -6,6 +6,8 @@ TagManager:
   tags:
   - PuntoControl
   - Destroy
+  - Semaforo
+  - Wall
   layers:
   - Default
   - TransparentFX

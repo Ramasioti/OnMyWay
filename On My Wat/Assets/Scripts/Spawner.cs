@@ -9,9 +9,15 @@ public class Spawner : MonoBehaviour
     public float spawnTime;
     public float spawnDelay;
 
+    public int numero;
+
     void Start()
     {
+        int n = (numero - 1) * 2;
+        spawnTime = PlayerPrefs.GetFloat("save" + (n  + 1),spawnTime);
+        spawnDelay = PlayerPrefs.GetFloat("save" +(n + 2),spawnDelay);
         InvokeRepeating("SpawnObject", spawnTime, spawnDelay);
+        
     }
 
 
@@ -23,4 +29,9 @@ public class Spawner : MonoBehaviour
             CancelInvoke("SpawnObject");
         }
     }
+
+
+
+
+
 }
