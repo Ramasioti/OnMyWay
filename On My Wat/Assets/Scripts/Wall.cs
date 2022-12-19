@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Wall : MonoBehaviour
 {
@@ -18,11 +19,11 @@ public class Wall : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collision collision)
+    public void ChanceScene()
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Destroy(collision.gameObject);
-        }
+        SceneManager.LoadScene("Menu");
     }
+
+
+    
 }
